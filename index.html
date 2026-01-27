@@ -6,6 +6,9 @@
     <title>Pre-Listing Exterior Prep | Market Ready Program | AZLawn Phoenix</title>
     <meta name="description" content="Get your Phoenix home's exterior photo-ready before listing. Family-owned AMS Landscaping has prepped 4,000+ properties over 20+ years. Starts at $1,000.">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,16 +67,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
         
         .nav-dark {
             background: transparent;
-        }
-        
-        .nav-light {
-            background: var(--white);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
         }
         
         .nav-logo img {
@@ -85,11 +83,16 @@
             display: none;
         }
         
-        .nav-light .nav-logo .logo-white {
+        .nav.scrolled {
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+        
+        .nav.scrolled .nav-logo .logo-white {
             display: none;
         }
         
-        .nav-light .nav-logo .logo-sage {
+        .nav.scrolled .nav-logo .logo-sage {
             display: block;
         }
         
@@ -104,7 +107,7 @@
             transition: all 0.3s ease;
         }
         
-        .nav-light .nav-cta {
+        .nav.scrolled .nav-cta {
             border-color: var(--sage);
             color: var(--sage);
         }
@@ -114,7 +117,7 @@
             color: var(--sage);
         }
         
-        .nav-light .nav-cta:hover {
+        .nav.scrolled .nav-cta:hover {
             background: var(--sage);
             color: var(--white);
         }
@@ -276,29 +279,12 @@
             padding: 100px 0;
         }
         
-        .section-cream {
-            background: var(--cream);
-        }
-        
-        .section-white {
-            background: var(--white);
-        }
-        
-        .section-sage {
-            background: var(--sage);
-            color: var(--white);
-        }
-        
         .section-eyebrow {
             font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--sage);
             margin-bottom: 16px;
-        }
-        
-        .section-sage .section-eyebrow {
-            color: rgba(255,255,255,0.7);
         }
         
         .section h2 {
@@ -311,10 +297,6 @@
             color: var(--charcoal-light);
             max-width: 600px;
             line-height: 1.8;
-        }
-        
-        .section-sage .section-intro {
-            color: rgba(255,255,255,0.85);
         }
         
         /* Problem Section */
@@ -335,6 +317,7 @@
             aspect-ratio: 4/3;
             overflow: hidden;
             border-radius: 4px;
+            background: var(--cream-dark);
         }
         
         .problem-card img {
@@ -436,6 +419,7 @@
             height: 200px;
             object-fit: cover;
             border-radius: 4px;
+            background: var(--cream-dark);
         }
         
         .truth-images img:first-child {
@@ -462,6 +446,7 @@
             height: 400px;
             object-fit: cover;
             border-radius: 4px;
+            background: var(--cream-dark);
         }
         
         .how-steps {
@@ -516,6 +501,7 @@
             object-fit: cover;
             border-radius: 4px;
             margin-bottom: 24px;
+            background: var(--cream-dark);
         }
         
         .included-card h3 {
@@ -530,7 +516,7 @@
             line-height: 1.7;
         }
         
-        /* Trust Section (Replaces Testimonials) */
+        /* Trust Section */
         .trust-section {
             padding: 80px 0;
             background: var(--sage);
@@ -578,15 +564,12 @@
             gap: 24px;
         }
         
-        .result-pair {
-            display: contents;
-        }
-        
         .result-image {
             position: relative;
             aspect-ratio: 4/3;
             overflow: hidden;
             border-radius: 4px;
+            background: var(--cream-dark);
         }
         
         .result-image img {
@@ -629,11 +612,6 @@
             gap: 24px;
             max-width: 900px;
             margin: 0 auto;
-        }
-        
-        .instagram-grid iframe {
-            width: 100%;
-            border: none;
         }
         
         .instagram-follow {
@@ -783,6 +761,8 @@
         .cta-image {
             height: 500px;
             overflow: hidden;
+            border-radius: 4px;
+            background: var(--cream-dark);
         }
         
         .cta-image img {
@@ -958,12 +938,20 @@
                 grid-template-columns: 1fr;
             }
             
+            .truth-images img:first-child {
+                grid-column: span 1;
+            }
+            
+            .truth-images {
+                grid-template-columns: 1fr;
+            }
+            
             .trust-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 24px;
             }
             
-            .section {
+            .section, .problem-section, .truth-section, .how-section, .included-section, .results-section, .fit-section, .investment-section, .cta-section {
                 padding: 60px 0;
             }
             
@@ -978,22 +966,10 @@
             .instagram-grid {
                 grid-template-columns: 1fr;
             }
-        }
-        
-        /* Animations */
-        [data-animate] {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        [data-animate].visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .js-loaded [data-animate] {
-            opacity: 0;
+            
+            .cta-image {
+                height: 300px;
+            }
         }
     </style>
 </head>
@@ -1055,7 +1031,7 @@
             <p class="section-eyebrow">The Reality</p>
             <h2>The sign goes up whether you're ready or not.</h2>
             
-            <div class="problem-grid" data-animate>
+            <div class="problem-grid">
                 <div class="problem-card">
                     <img src="images/problem-forsale-sign.png" alt="For sale sign in yard">
                     <div class="problem-card-text">Ready or not, the sign goes up.</div>
@@ -1070,7 +1046,7 @@
                 </div>
             </div>
             
-            <div class="problem-summary" data-animate>
+            <div class="problem-summary">
                 <p>You're already thinking about staging, repairs, inspections, and timing. The photographer is booked. The listing date is set.</p>
                 <strong>The yard shouldn't be one more thing on your list.</strong>
             </div>
@@ -1081,7 +1057,7 @@
     <section class="truth-section">
         <div class="container">
             <div class="truth-grid">
-                <div class="truth-content" data-animate>
+                <div class="truth-content">
                     <p class="section-eyebrow">The Truth</p>
                     <h2>Buyers decide before they walk inside.</h2>
                     <p>Clean lines. Fresh rock. Trimmed edges. Visible maintenance. These details don't just photograph well—they tell buyers the home has been cared for.</p>
@@ -1091,7 +1067,7 @@
                         <li>Buyers walk in already feeling good</li>
                     </ul>
                 </div>
-                <div class="truth-images" data-animate>
+                <div class="truth-images">
                     <img src="images/edge-detail-1.png" alt="Clean gravel edges">
                     <img src="images/edge-detail-2.png" alt="Well-maintained desert landscaping">
                     <img src="images/sideyard-path.png" alt="Clean side yard walkway">
@@ -1104,15 +1080,15 @@
     <section class="how-section">
         <div class="container">
             <div class="how-header">
-                <div data-animate>
+                <div>
                     <p class="section-eyebrow">How It Works</p>
                     <h2>One walkthrough.<br>One plan. Done.</h2>
                     <p class="section-intro">We walk the property once, build your scope, and take it from there. No chasing contractors. No coordinating crews. No wondering if it'll be ready in time.</p>
                 </div>
-                <img src="images/solution-walkthrough.png" alt="Professional walkthrough consultation" data-animate>
+                <img src="images/solution-walkthrough.png" alt="Professional walkthrough consultation">
             </div>
             
-            <div class="how-steps" data-animate>
+            <div class="how-steps">
                 <div class="how-step">
                     <p class="how-step-number">01</p>
                     <h3>Done by Your Date</h3>
@@ -1135,12 +1111,12 @@
     <!-- What's Included -->
     <section class="included-section">
         <div class="container">
-            <div style="text-align: center;" data-animate>
+            <div style="text-align: center;">
                 <p class="section-eyebrow">What's Included</p>
                 <h2>Everything buyers notice.<br>Nothing they don't.</h2>
             </div>
             
-            <div class="included-grid" data-animate>
+            <div class="included-grid">
                 <div class="included-card">
                     <img src="images/camera-arizona.png" alt="Home ready for listing photos">
                     <h3>Photo Ready Reset</h3>
@@ -1160,10 +1136,10 @@
         </div>
     </section>
 
-    <!-- Trust Section (Replaces Testimonials) -->
+    <!-- Trust Section -->
     <section class="trust-section">
         <div class="container">
-            <div class="trust-grid" data-animate>
+            <div class="trust-grid">
                 <div class="trust-item">
                     <div class="trust-number">20+</div>
                     <div class="trust-label">Years in Business</div>
@@ -1187,13 +1163,13 @@
     <!-- Before/After Results -->
     <section class="results-section">
         <div class="container">
-            <div class="results-header" data-animate>
+            <div class="results-header">
                 <p class="section-eyebrow">The Results</p>
                 <h2>Before & After</h2>
                 <p class="section-intro" style="margin: 0 auto;">Same angle. Same property. Different impression.</p>
             </div>
             
-            <div class="results-grid" data-animate>
+            <div class="results-grid">
                 <div class="result-image">
                     <span class="result-label">Before</span>
                     <img src="images/beforeafter-entry-before.png" alt="Entry before">
@@ -1245,13 +1221,13 @@
     <!-- Instagram Section -->
     <section class="instagram-section">
         <div class="container">
-            <div class="instagram-header" data-animate>
+            <div class="instagram-header">
                 <p class="section-eyebrow">See More Work</p>
                 <h2>Follow Along</h2>
                 <p class="section-intro" style="margin: 0 auto;">More transformations on Instagram</p>
             </div>
             
-            <div class="instagram-grid" data-animate>
+            <div class="instagram-grid">
                 <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DSQzrDLEqUT/" data-instgrm-version="14"></blockquote>
                 <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DSQznwEEmPO/" data-instgrm-version="14"></blockquote>
                 <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DSQzjzKkvdp/" data-instgrm-version="14"></blockquote>
@@ -1270,11 +1246,11 @@
     <!-- Is This Right For You -->
     <section class="fit-section">
         <div class="container">
-            <div style="text-align: center;" data-animate>
+            <div style="text-align: center;">
                 <p class="section-eyebrow">Is This Right For You?</p>
             </div>
             
-            <div class="fit-grid" data-animate>
+            <div class="fit-grid">
                 <div class="fit-column">
                     <h3>This is for you if...</h3>
                     <ul>
@@ -1301,14 +1277,14 @@
     <section class="investment-section">
         <div class="container">
             <div class="investment-grid">
-                <div class="investment-content" data-animate>
+                <div class="investment-content">
                     <p class="section-eyebrow">The Investment</p>
                     <h2>The ROI speaks for itself.</h2>
                     <p>Homes with strong curb appeal sell for 7% more on average. That's $35,000 on a $500,000 home.</p>
                     <p>Most projects fall between $1,000 and $5,000 depending on scope and property size. That's less than 1% of most sale prices—and the return shows up in faster offers, fewer price reductions, and buyers who walk in already sold on the outside.</p>
                     <p class="highlight">This isn't an expense. It's part of the sale strategy.</p>
                 </div>
-                <div class="investment-price" data-animate>
+                <div class="investment-price">
                     <p class="eyebrow">Typical Investment</p>
                     <p class="price">Starts at $1K</p>
                     <p class="range">Most projects: $1,000 – $5,000</p>
@@ -1325,7 +1301,7 @@
                 <div class="cta-image">
                     <img src="images/homeowner-desert.png" alt="Homeowner looking at completed desert yard">
                 </div>
-                <div class="cta-content" data-animate>
+                <div class="cta-content">
                     <p class="section-eyebrow">Ready?</p>
                     <h2>Let's walk the property.</h2>
                     <p>We'll assess the scope, give you a clear number, and lock in your timeline. No pressure. No obligation. Just clarity on what it takes.</p>
@@ -1375,26 +1351,7 @@
             if (monthBanner) monthBanner.textContent = displayMonth;
             if (monthCTA) monthCTA.textContent = displayMonth;
             
-            // Enable animations
-            document.body.classList.add('js-loaded');
-            
-            // Fade in animations
-            const fadeObserver = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                        }
-                    });
-                },
-                { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-            );
-            
-            document.querySelectorAll('[data-animate]').forEach((el) => {
-                fadeObserver.observe(el);
-            });
-            
-            // Nav color change on scroll
+            // Nav scroll behavior
             const nav = document.getElementById('mainNav');
             const hero = document.querySelector('.hero');
             
@@ -1402,11 +1359,9 @@
                 const heroHeight = hero.offsetHeight;
                 window.addEventListener('scroll', function() {
                     if (window.scrollY > heroHeight - 100) {
-                        nav.classList.remove('nav-dark');
-                        nav.classList.add('nav-light');
+                        nav.classList.add('scrolled');
                     } else {
-                        nav.classList.add('nav-dark');
-                        nav.classList.remove('nav-light');
+                        nav.classList.remove('scrolled');
                     }
                 });
             }
