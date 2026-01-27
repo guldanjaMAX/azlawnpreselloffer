@@ -119,58 +119,121 @@
             color: var(--white);
         }
         
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--sage-dark) 0%, var(--sage) 50%, var(--sage-light) 100%);
-            padding: 100px 24px 40px;
+        /* Hero Fullbleed */
+        .hero-fullbleed {
             position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
             overflow: hidden;
         }
         
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
+        .hero-bg-desktop,
+        .hero-bg-mobile {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-bg-desktop {
+            display: none;
+        }
+        
+        .hero-bg-mobile {
+            display: block;
+            background-position: center top;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-bg-desktop {
+                display: block;
+            }
+            .hero-bg-mobile {
+                display: none;
+            }
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 100%);
+        }
+        
+        @media (min-width: 768px) {
+            .hero-overlay {
+                background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.15) 70%, rgba(0,0,0,0) 100%);
+            }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 100px 24px 60px;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-content {
+                padding: 120px 48px 80px;
+            }
         }
         
         .hero-text {
             max-width: 560px;
         }
         
-        .hero h1 {
-            font-size: clamp(36px, 5vw, 56px);
-            color: var(--white);
-            margin-bottom: 20px;
+        .hero-text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3);
         }
         
-        .hero h1 em {
+        .hero-subtext-shadow {
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .hero-fullbleed h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            color: var(--white);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        
+        .hero-fullbleed h1 em {
             font-style: italic;
         }
         
         .hero-subhead {
             font-size: 17px;
-            color: rgba(255,255,255,0.85);
+            color: rgba(255,255,255,0.9);
             margin-bottom: 28px;
             line-height: 1.7;
+            max-width: 480px;
         }
         
         .hero-buttons {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
+            margin-bottom: 40px;
         }
         
         .btn-primary {
             background: var(--white);
             color: var(--sage);
-            padding: 14px 28px;
+            padding: 16px 32px;
             font-size: 15px;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
+            display: inline-block;
         }
         
         .btn-primary:hover {
@@ -182,11 +245,12 @@
             background: transparent;
             border: 1px solid rgba(255,255,255,0.5);
             color: var(--white);
-            padding: 14px 28px;
+            padding: 16px 32px;
             font-size: 15px;
             font-weight: 500;
             text-decoration: none;
             transition: all 0.3s ease;
+            display: inline-block;
         }
         
         .btn-secondary:hover {
@@ -194,83 +258,49 @@
             border-color: var(--white);
         }
         
-        /* Hero Before/After */
-        .hero-comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            border-radius: 8px;
-            overflow: hidden;
+        /* Hero Stats */
+        .hero-stats {
+            margin-top: 32px;
         }
         
-        .hero-comparison-item {
-            position: relative;
-            aspect-ratio: 4/3;
-            overflow: hidden;
-        }
-        
-        .hero-comparison-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .hero-comparison-label {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: var(--charcoal);
-            color: var(--white);
-            padding: 4px 10px;
-            font-size: 11px;
-            font-weight: 600;
+        .hero-stats-label {
+            font-size: 10px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 2px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 16px;
         }
         
-        .hero-comparison-label.after {
-            background: var(--sage);
-        }
-        
-        /* Stats Bar */
-        .stats-bar {
-            background: var(--sage-dark);
-            padding: 24px;
-        }
-        
-        .stats-bar .container {
+        .hero-stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            text-align: center;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 400px;
         }
         
-        .stat-item {
-            color: var(--white);
+        .hero-stat {
+            text-align: left;
         }
         
-        .stat-number {
+        .hero-stat-number {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-weight: 500;
-            display: block;
-            line-height: 1.1;
+            font-size: 28px;
+            color: var(--white);
+            font-weight: 400;
+            line-height: 1;
+            margin-bottom: 4px;
         }
         
-        .stat-label {
+        .hero-stat-label {
             font-size: 11px;
-            opacity: 0.8;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: rgba(255,255,255,0.8);
             line-height: 1.3;
         }
         
-        .stats-source {
-            grid-column: span 4;
-            font-size: 10px;
-            opacity: 0.5;
-            margin-top: 8px;
+        .hero-stats-source {
+            font-size: 9px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 12px;
         }
         
         /* Section Styles */
@@ -891,18 +921,12 @@
         
         /* Responsive */
         @media (max-width: 1024px) {
-            .hero-grid,
             .truth-grid,
             .how-header,
             .investment-grid,
             .cta-grid {
                 grid-template-columns: 1fr;
                 gap: 32px;
-            }
-            
-            .hero-comparison {
-                max-width: 500px;
-                margin: 0 auto;
             }
             
             .how-header img {
@@ -924,17 +948,20 @@
                 height: 32px;
             }
             
-            /* Hide nav phone button on mobile */
             .nav-cta {
                 display: none;
             }
             
-            .hero {
-                padding: 70px 16px 32px;
+            .hero-fullbleed {
+                min-height: 100vh;
             }
             
-            .hero h1 {
-                font-size: 32px;
+            .hero-content {
+                padding: 80px 20px 40px;
+            }
+            
+            .hero-fullbleed h1 {
+                font-size: 28px;
             }
             
             .hero-subhead {
@@ -944,35 +971,25 @@
             
             .hero-buttons {
                 flex-direction: column;
+                margin-bottom: 32px;
             }
             
             .hero-buttons a {
                 text-align: center;
+                width: 100%;
+                padding: 18px 32px;
             }
             
-            .hero-comparison {
-                margin-top: 24px;
+            .hero-stats-grid {
+                gap: 16px;
             }
             
-            .stats-bar {
-                padding: 20px 16px;
+            .hero-stat-number {
+                font-size: 24px;
             }
             
-            .stats-bar .container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            
-            .stat-number {
-                font-size: 28px;
-            }
-            
-            .stat-label {
+            .hero-stat-label {
                 font-size: 10px;
-            }
-            
-            .stats-source {
-                grid-column: span 2;
             }
             
             .problem-grid,
@@ -1046,50 +1063,40 @@
         <a href="tel:6029440421" class="nav-cta">Call 602.944.0421</a>
     </nav>
 
-    <section class="hero">
-        <div class="hero-grid">
+    <section class="hero-fullbleed">
+        <div class="hero-bg-desktop" style="background-image: url('images/hero-wide-desert.png');"></div>
+        <div class="hero-bg-mobile" style="background-image: url('images/entry-pots.png');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
             <div class="hero-text">
-                <h1>Your listing date is set.<br><em>Is your exterior ready?</em></h1>
-                <p class="hero-subhead">Buyers decide in seconds. Before the front door opens, they've already formed an opinion. We get your exterior photo ready before your first showing.</p>
+                <h1 class="hero-text-shadow">Your listing date is set.<br><em>Is your exterior ready?</em></h1>
+                <p class="hero-subhead hero-subtext-shadow">Buyers decide in seconds. Before the front door opens, they've already formed an opinion. We get your exterior photo ready before your first showing.</p>
                 <div class="hero-buttons">
                     <a href="tel:6029440421" class="btn-primary">Call 602.944.0421</a>
                     <a href="https://interactor.ai/azlawns" class="btn-secondary">Chat Now</a>
                 </div>
-            </div>
-            <div class="hero-comparison">
-                <div class="hero-comparison-item">
-                    <span class="hero-comparison-label">Before</span>
-                    <img src="images/beforeafter-entry-before.png" alt="Entry before transformation">
-                </div>
-                <div class="hero-comparison-item">
-                    <span class="hero-comparison-label after">After</span>
-                    <img src="images/beforeafter-entry-after.png" alt="Entry after transformation">
+                
+                <div class="hero-stats">
+                    <p class="hero-stats-label hero-subtext-shadow">Why Curb Appeal Pays</p>
+                    <div class="hero-stats-grid">
+                        <div class="hero-stat">
+                            <p class="hero-stat-number hero-text-shadow">7%</p>
+                            <p class="hero-stat-label hero-subtext-shadow">higher sale price</p>
+                        </div>
+                        <div class="hero-stat">
+                            <p class="hero-stat-number hero-text-shadow">217%</p>
+                            <p class="hero-stat-label hero-subtext-shadow">ROI on landscaping</p>
+                        </div>
+                        <div class="hero-stat">
+                            <p class="hero-stat-number hero-text-shadow">92%</p>
+                            <p class="hero-stat-label hero-subtext-shadow">realtors recommend</p>
+                        </div>
+                    </div>
+                    <p class="hero-stats-source hero-subtext-shadow">Sources: NAR, Journal of Real Estate Finance and Economics</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <div class="stats-bar">
-        <div class="container">
-            <div class="stat-item">
-                <span class="stat-number">7%</span>
-                <span class="stat-label">Higher Sale Price</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">217%</span>
-                <span class="stat-label">ROI on Landscaping</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">92%</span>
-                <span class="stat-label">Realtors Recommend</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">76%</span>
-                <span class="stat-label">Buyers Drive By First</span>
-            </div>
-            <p class="stats-source">Sources: NAR, Journal of Real Estate Finance and Economics</p>
-        </div>
-    </div>
 
     <section class="problem-section">
         <div class="container">
@@ -1382,7 +1389,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const nav = document.getElementById('mainNav');
-            const hero = document.querySelector('.hero');
+            const hero = document.querySelector('.hero-fullbleed');
             
             if (hero && nav) {
                 const heroHeight = hero.offsetHeight;
