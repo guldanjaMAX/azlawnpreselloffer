@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2D8B9E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3D7A4A;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Circle outline -->
+  <circle cx="30" cy="30" r="26" fill="none" stroke="url(#logoGradient)" stroke-width="2.5"/>
+  
+  <!-- Wave lines at bottom -->
+  <path d="M8 35 Q15 32, 22 35 T36 35 T50 35" fill="none" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M12 41 Q19 38, 26 41 T40 41 T48 41" fill="none" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Grass/plant blades -->
+  <path d="M22 34 L22 18 Q22 14, 26 12" fill="none" stroke="url(#logoGradient)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M30 34 L30 14" fill="none" stroke="url(#logoGradient)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M38 34 L38 18 Q38 14, 34 12" fill="none" stroke="url(#logoGradient)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M26 34 L26 20 Q26 17, 23 15" fill="none" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M34 34 L34 20 Q34 17, 37 15" fill="none" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- AMS Text -->
+  <text x="70" y="32" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="url(#logoGradient)">AMS</text>
+  
+  <!-- azlawns.com text -->
+  <text x="70" y="48" font-family="Arial, sans-serif" font-size="12" fill="#2D8B9E">azlawns.com</text>
+</svg>
