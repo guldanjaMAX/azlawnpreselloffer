@@ -15,7 +15,7 @@ export async function onRequestPost(context) {
 
   const ZOOM        = 'https://us06web.zoom.us/j/5422970326?pwd=ThcDfaqEZpeg7y7XJCGLIsh9XGPaan.1';
   const RESEND_KEY  = env.RESEND_KEY;
-  const FROM        = 'AMS Landscaping <onboarding@resend.dev>';
+  const FROM        = 'AMS Landscaping <noreply@gotlandscapers.com>';
   const REPLY_TO    = 'james@jamesguldan.com';
 
   if (!RESEND_KEY) return json({ error: 'Email service not configured. Please call 602.944.0421.' }, 500);
