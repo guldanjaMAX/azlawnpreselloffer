@@ -281,7 +281,7 @@ function hostMail(name, email, readable, time, zoom) {
   <div class="b">
     <div class="r"><div class="l">Candidate</div><div class="v">${esc(name)}</div><div class="s">${esc(email)}</div></div>
     <div class="r"><div class="l">Date &amp; Time</div><div class="v">${esc(readable)}</div><div class="s">${esc(time)} MST &middot; 30-min Zoom call</div></div>
-    <div class="r"><div class="l">Zoom Link</div><div class="s" style="word-break:break-all">${esc(zoom)}</div><a class="btn" href="${esc(zoom)}">Join Meeting</a></div>
+    <div class="r"><div class="l">Zoom Link</div><div class="s" style="word-break:break-all">${esc(zoom)}</div><a style="display:inline-block;margin-top:12px;padding:11px 22px;background:#1d4ed8;color:#ffffff;border-radius:6px;text-decoration:none;font-size:14px;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;letter-spacing:.2px" href="${esc(zoom)}">Join Meeting</a></div>
     <div class="ft">Calendar invite attached &mdash; open the .ics file to add to your calendar.</div>
   </div>
 </div></body></html>`;
@@ -309,7 +309,7 @@ function candMail(name, readable, time, zoom) {
   <div class="b">
     <p style="margin:0 0 16px;font-size:15px;color:#374151">Hi ${esc(name)}, you're all set!</p>
     <div class="r"><div class="l">Date &amp; Time</div><div class="v">${esc(readable)}</div><div class="s">${esc(time)} MST (Phoenix, AZ) &middot; 30 minutes</div></div>
-    <div class="r"><div class="l">How to Join</div><div class="s">Video interview on Zoom</div><div class="s" style="word-break:break-all;margin-top:6px">${esc(zoom)}</div><a class="btn" href="${esc(zoom)}">Join Zoom Meeting</a></div>
+    <div class="r"><div class="l">How to Join</div><div class="s">Video interview on Zoom</div><div class="s" style="word-break:break-all;margin-top:6px">${esc(zoom)}</div><a style="display:inline-block;margin-top:12px;padding:11px 22px;background:#1d4ed8;color:#ffffff;border-radius:6px;text-decoration:none;font-size:14px;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;letter-spacing:.2px" href="${esc(zoom)}">Join Zoom Meeting</a></div>
     <div class="ft">Calendar invite attached &mdash; open the .ics file to add to your calendar.<br>Questions? Call <strong>602.944.0421</strong></div>
   </div>
 </div></body></html>`;
