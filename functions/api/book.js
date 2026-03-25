@@ -1,5 +1,5 @@
 export async function onRequestPost(context) {
-  const { request } = context;
+  const { request, env } = context;
 
   let body;
   try { body = await request.json(); }
@@ -14,9 +14,11 @@ export async function onRequestPost(context) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: 'Invalid email address.' }, 400);
 
   const ZOOM        = 'https://us06web.zoom.us/j/5422970326?pwd=ThcDfaqEZpeg7y7XJCGLIsh9XGPaan.1';
-  const RESEND_KEY  = 're_imJGQX9k_7hL5s6KnHmE7N2TWSCffqL3F';
+  const RESEND_KEY  = env.RESEND_KEY;
   const FROM        = 'AMS Landscaping <onboarding@resend.dev>';
   const REPLY_TO    = 'james@jamesguldan.com';
+
+  if (!RESEND_KEY) return json({ error: 'Email service not configured. Please call 602.944.0421.' }, 500);
 
   const dtStart  = mstToUtc(date, time);
   const dtEnd    = utcAdd(dtStart, 30);
