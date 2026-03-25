@@ -293,6 +293,11 @@
       .meta-pills { gap: 6px; }
       .pill { font-size: 11px; padding: 4px 10px; }
     }
+  
+    .cal-section{margin-top:20px}
+    .cal-section-label{font-size:13px;color:#6b7280;margin-bottom:10px}
+    .cal-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+    .cal-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;border:1.5px solid #d1d5db;color:#374151;background:#fff;transition:background .15s,border-color .15s}.cal-btn:hover{background:#f9fafb;border-color:#9ca3af}
   </style>
 </head>
 <body>
@@ -362,6 +367,13 @@
         <div class="row"><div class="lbl">Zoom</div><div class="val"><a href="https://us06web.zoom.us/j/5422970326?pwd=ThcDfaqEZpeg7y7XJCGLIsh9XGPaan.1" target="_blank">Click to join when it's time</a></div></div>
       </div>
       <a href="https://us06web.zoom.us/j/5422970326?pwd=ThcDfaqEZpeg7y7XJCGLIsh9XGPaan.1" class="zoom-btn-big" target="_blank">Save Zoom Link</a>
+    <div class="cal-section">
+      <p class="cal-section-label">Add to your calendar</p>
+      <div class="cal-btns">
+        <a id="cal-google" href="#" target="_blank" class="cal-btn">&#128197; Google Calendar</a>
+        <a id="cal-ics" href="#" class="cal-btn">&#128197; Apple / Outlook</a>
+      </div>
+    </div>
       <p class="footer-note">Questions? Call 602.944.0421</p>
     </div>
   </div>
@@ -479,6 +491,7 @@
         // Show success
         const dayObj = SLOTS.find(d => d.date === selectedDate);
         document.getElementById('s-name').textContent = name;
+    window._bd = {n: name, d: selectedDate, t: selectedTime};
         document.getElementById('s-when').textContent = `${dayObj.weekday}, ${dayObj.mo} ${dayObj.dd} at ${selectedTime} MST`;
         show('screen-success');
 
@@ -490,6 +503,43 @@
         btn.textContent = 'Book My Interview →';
       }
     });
-  </script>
+  
+
+function _buildCalLinks() {
+  var bd = window._bd;
+  if (!bd) return;
+  var ZOOM = 'https://us06web.zoom.us/j/5422970326?pwd=ThcDfaqEZpeg7y7XJCGLIsh9XGPaan.1';
+  var parts = bd.d.split('-').map(Number);
+  var y = parts[0], mo = parts[1], d = parts[2];
+  var tm = bd.t.match(/(\d+):(\d+)\s*(AM|PM)/i);
+  var h = +tm[1], min = +tm[2];
+  if (tm[3].toUpperCase() === 'PM' && h !== 12) h += 12;
+  if (tm[3].toUpperCase() === 'AM' && h === 12) h = 0;
+  var startMs = Date.UTC(y, mo - 1, d, h + 7, min, 0);
+  var endMs = startMs + 30 * 60 * 1000;
+  function fmt(ms) { return new Date(ms).toISOString().replace(/[-:]/g,'').replace('.000',''); }
+  var title = 'Setter Interview: ' + bd.n;
+  var details = 'Zoom: ' + ZOOM + '\n\nScheduled via gotlandscapers.com/book';
+  document.getElementById('cal-google').href =
+    'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+    '&text=' + encodeURIComponent(title) +
+    '&dates=' + fmt(startMs) + '/' + fmt(endMs) +
+    '&details=' + encodeURIComponent(details) +
+    '&location=' + encodeURIComponent(ZOOM);
+  var ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//AMS//Interview//EN\r\nBEGIN:VEVENT\r\nDTSTART:' + fmt(startMs) + '\r\nDTEND:' + fmt(endMs) + '\r\nSUMMARY:' + title + '\r\nDESCRIPTION:Zoom: ' + ZOOM + '\r\nLOCATION:' + ZOOM + '\r\nEND:VEVENT\r\nEND:VCALENDAR';
+  var icsEl = document.getElementById('cal-ics');
+  icsEl.href = URL.createObjectURL(new Blob([ics], {type: 'text/calendar'}));
+  icsEl.download = 'interview.ics';
+}
+
+// Wrap show() to trigger calendar links when success screen appears
+(function(){
+  var _show = show;
+  show = function(id) {
+    _show(id);
+    if (id === 'screen-success') _buildCalLinks();
+  };
+})();
+</script>
 </body>
 </html>
