@@ -384,8 +384,9 @@
 
   document.getElementById('modal-confirm-btn').addEventListener('click', () => {
     if (pendingCalendlyUrl) {
+      const urlToOpen = pendingCalendlyUrl;
       closeModal();
-      window.open(pendingCalendlyUrl, '_blank');
+      window.open(urlToOpen, '_blank');
     }
   });
 
