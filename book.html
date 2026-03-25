@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Schedule Your Interview — AMS Landscaping</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -387,11 +385,7 @@
   document.getElementById('modal-confirm-btn').addEventListener('click', () => {
     if (pendingCalendlyUrl) {
       closeModal();
-      if (typeof Calendly !== 'undefined') {
-        Calendly.initPopupWidget({ url: pendingCalendlyUrl });
-      } else {
-        window.open(pendingCalendlyUrl, '_blank');
-      }
+      window.open(pendingCalendlyUrl, '_blank');
     }
   });
 
