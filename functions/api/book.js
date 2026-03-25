@@ -44,10 +44,109 @@ export async function onRequestPost(context) {
     return json({ error: msg }, 502);
   }
 
+
+  // ── Google Calendar ───────────────────────────────────────────
+  const G_CLIENT_ID     = env.GOOGLE_CLIENT_ID;
+  const G_CLIENT_SECRET = env.GOOGLE_CLIENT_SECRET;
+  const G_REFRESH_TOKEN = env.GOOGLE_REFRESH_TOKEN;
+
+  if (G_CLIENT_ID && G_CLIENT_SECRET && G_REFRESH_TOKEN) {
+    try {
+      const accessToken = await getGoogleAccessToken(G_CLIENT_ID, G_CLIENT_SECRET, G_REFRESH_TOKEN);
+      const calEvent    = buildCalendarEvent({ name, email, date, time, readable, zoom: ZOOM });
+
+      // Create on James's primary calendar
+      await createCalendarEvent(accessToken, 'primary', calEvent);
+
+      // Create on Eli's calendar (requires Eli to share calendar with james@jamesguldan.com)
+      await createCalendarEvent(accessToken, 'eli@azlawns.com', calEvent);
+    } catch (calErr) {
+      // Calendar failure is non-fatal — emails already sent
+      console.error('Google Calendar error:', calErr.message);
+    }
+  }
   return json({ success: true });
 }
 
 // ── Utilities ──────────────────────────────────────────────────────────────────
+
+// ── Google Calendar API ────────────────────────────────────────────
+
+async function getGoogleAccessToken(clientId, clientSecret, refreshToken) {
+  const r = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      client_id:     clientId,
+      client_secret: clientSecret,
+      refresh_token: refreshToken,
+      grant_type:    'refresh_token',
+    }),
+  });
+  if (!r.ok) {
+    const e = await r.json().catch(() => ({}));
+    throw new Error(`Google token error: ${e.error_description || r.status}`);
+  }
+  return (await r.json()).access_token;
+}
+
+async function createCalendarEvent(accessToken, calendarId, event) {
+  const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events?sendUpdates=none`;
+  const r = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization:  `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(event),
+  });
+  if (!r.ok) {
+    const e = await r.json().catch(() => ({}));
+    throw new Error(`Calendar error (${calendarId}): ${e.error?.message || r.status}`);
+  }
+  return r.json();
+}
+
+function buildCalendarEvent({ name, email, date, time, readable, zoom }) {
+  // Parse local Phoenix MST time → UTC milliseconds
+  const [y, mo, d] = date.split('-').map(Number);
+  const m = time.match(/^(\d+):(\d+)\s*(AM|PM)$/i);
+  let h = +m[1], min = +m[2];
+  const ap = m[3].toUpperCase();
+  if (ap === 'PM' && h !== 12) h += 12;
+  if (ap === 'AM' && h === 12) h = 0;
+  // Phoenix MST = UTC-7 (no DST)
+  const startMs = Date.UTC(y, mo - 1, d, h + 7, min, 0);
+  const endMs   = startMs + 30 * 60 * 1000;
+
+  return {
+    summary:     `Setter Interview: ${name}`,
+    description: [
+      `Candidate: ${name}`,
+      `Email:     ${email}`,
+      ``,
+      `Zoom Meeting:`,
+      zoom,
+      ``,
+      `Scheduled via gotlandscapers.com/book`,
+    ].join('\n'),
+    location: zoom,
+    start: { dateTime: new Date(startMs).toISOString(), timeZone: 'America/Phoenix' },
+    end:   { dateTime: new Date(endMs).toISOString(),   timeZone: 'America/Phoenix' },
+    attendees: [
+      { email: 'james@jamesguldan.com', displayName: 'James',          responseStatus: 'accepted'     },
+      { email: 'eli@azlawns.com',       displayName: 'Eli',            responseStatus: 'accepted'     },
+      { email: email,                   displayName: name,             responseStatus: 'needsAction'  },
+    ],
+    reminders: {
+      useDefault: false,
+      overrides: [
+        { method: 'popup', minutes: 15 },
+        { method: 'email', minutes: 60 },
+      ],
+    },
+  };
+}
 
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status,
