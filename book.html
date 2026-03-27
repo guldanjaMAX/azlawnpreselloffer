@@ -392,13 +392,20 @@
       { date: '2026-04-07', mo: 'Apr', dd: '7',  weekday: 'Tuesday',   times: ['10:30 AM'] },
     ];
 
+    // ── Filter out today (no same-day booking) ────────────────────────────────
+    const today = new Date();
+    const todayStr = today.getFullYear() + '-' +
+      String(today.getMonth() + 1).padStart(2, '0') + '-' +
+      String(today.getDate()).padStart(2, '0');
+    const availableSlots = SLOTS.filter(day => day.date !== todayStr);
+
     // ── State ─────────────────────────────────────────────────────────────────
     let selectedDate = null;
     let selectedTime = null;
 
     // ── Render slot grid ──────────────────────────────────────────────────────
     const container = document.getElementById('days-container');
-    SLOTS.forEach(day => {
+    availableSlots.forEach(day => {
       const card = document.createElement('div');
       card.className = 'day-card';
       card.innerHTML = `
