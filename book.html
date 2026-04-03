@@ -5,160 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Schedule Your Interview | AMS Landscaping</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#f0f4f0;color:#1a2e1a;min-height:100vh}
-.top-bar{background:#2d7a3a;color:#fff;text-align:center;padding:10px 16px;font-size:13px;font-weight:500;letter-spacing:0.3px}
+body{font-family:'Inter',system-ui,sans-serif;background:#f0f4f0;color:#1a2e1a;min-height:100vh}
+.top-bar{background:#2d7a3a;color:#fff;text-align:center;padding:10px 16px;font-size:13px;font-weight:500;letter-spacing:.3px}
 .top-bar a{color:#b8e6c1;text-decoration:none}
-.hero{background:linear-gradient(135deg,#23662e 0%,#2d7a3a 50%,#35893f 100%);color:#fff;padding:48px 24px 40px;text-align:center}
-.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;margin-bottom:10px;letter-spacing:-0.5px}
-.hero p{font-size:clamp(0.95rem,2vw,1.1rem);opacity:0.88;max-width:500px;margin:0 auto;line-height:1.5}
+.hero{background:linear-gradient(135deg,#2d7a3a 0%,#1e5c28 100%);color:#fff;padding:48px 24px 40px;text-align:center}
+.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;margin-bottom:8px;letter-spacing:-.5px}
+.hero p{font-size:15px;opacity:.88;max-width:480px;margin:0 auto;line-height:1.5}
 .info-bar{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;padding:20px 24px;background:#fff;border-bottom:1px solid #e2e8e2}
-.info-item{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#2d7a3a}
+.info-item{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#3a6b3a}
 .info-item svg{width:18px;height:18px;flex-shrink:0}
 .container{max-width:720px;margin:0 auto;padding:24px 16px 60px}
-.day-card{background:#fff;border-radius:14px;padding:24px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.06),0 4px 12px rgba(0,0,0,0.04);border:1px solid #e8efe8}
-.day-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.date-badge{background:#eaf5ec;color:#2d7a3a;font-weight:700;font-size:22px;width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.day-info h3{font-size:16px;font-weight:700;color:#1a2e1a}
-.day-info .meta{font-size:13px;color:#6b8a6b;margin-top:2px}
+.day-card{background:#fff;border-radius:14px;padding:20px 20px 16px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.day-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.date-badge{background:#e8f5e9;color:#2d7a3a;font-weight:700;font-size:13px;padding:6px 12px;border-radius:8px;white-space:nowrap}
+.day-name{font-weight:700;font-size:16px;color:#1a2e1a}
+.slot-count{font-size:12px;color:#6b8f6b;margin-left:auto;font-weight:500}
 .slots{display:flex;flex-wrap:wrap;gap:8px}
-.slot-btn{background:#f0f7f1;color:#2d7a3a;border:1.5px solid #c8e0cc;border-radius:10px;padding:10px 18px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s ease;font-family:'Inter',sans-serif}
-.slot-btn:hover{background:#2d7a3a;color:#fff;border-color:#2d7a3a;transform:translateY(-1px);box-shadow:0 4px 12px rgba(45,122,58,0.25)}
-.slot-btn:active{transform:translateY(0)}
-.empty-state{background:#fff;border-radius:14px;padding:48px 24px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.06);border:1px solid #e8efe8}
-.empty-state svg{width:48px;height:48px;color:#b8d4bc;margin-bottom:16px}
-.empty-state h3{font-size:18px;font-weight:700;margin-bottom:8px}
-.empty-state p{color:#6b8a6b;font-size:14px}
-.empty-state a{color:#2d7a3a;font-weight:600;text-decoration:none}
-.footer-note{text-align:center;padding:16px;font-size:12px;color:#8a9e8a}
-.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1000;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(3px)}
-.modal-backdrop.active{display:flex}
-.modal{background:#fff;border-radius:18px;padding:36px 32px;max-width:400px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.2);position:relative}
-.modal svg.check{width:48px;height:48px;color:#2d7a3a;margin-bottom:12px}
-.modal h2{font-size:20px;font-weight:700;margin-bottom:6px}
-.modal .selected-time{font-size:15px;color:#4a7a4a;margin-bottom:24px;line-height:1.5}
-.modal .cta-btn{display:block;width:100%;background:#2d7a3a;color:#fff;border:none;border-radius:12px;padding:15px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background 0.15s}
+.slot-btn{background:#f0f7f1;border:1.5px solid #c8e0cb;color:#2d7a3a;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;padding:10px 18px;border-radius:10px;cursor:pointer;transition:all .15s ease}
+.slot-btn:hover{background:#2d7a3a;color:#fff;border-color:#2d7a3a;transform:translateY(-1px);box-shadow:0 3px 10px rgba(45,122,58,.25)}
+.empty-state{text-align:center;padding:48px 24px;background:#fff;border-radius:14px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.empty-state svg{width:48px;height:48px;color:#b8d4bb;margin-bottom:16px}
+.empty-state p{font-size:15px;color:#6b8f6b;line-height:1.5}
+.footer-note{text-align:center;font-size:12px;color:#8a9f8a;margin-top:32px;line-height:1.5}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;justify-content:center;align-items:center;padding:16px}
+.modal-overlay.active{display:flex}
+.modal{background:#fff;border-radius:18px;padding:32px 28px;max-width:400px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.2);position:relative}
+.modal h2{font-size:18px;font-weight:700;margin-bottom:4px;color:#1a2e1a}
+.modal .selected-time{font-size:22px;font-weight:800;color:#2d7a3a;margin:12px 0 4px}
+.modal .selected-date{font-size:14px;color:#6b8f6b;margin-bottom:20px}
+.modal .cta-btn{display:block;width:100%;background:#2d7a3a;color:#fff;border:none;font-family:'Inter',sans-serif;font-weight:700;font-size:15px;padding:14px;border-radius:12px;cursor:pointer;transition:background .15s}
 .modal .cta-btn:hover{background:#236b2e}
-.modal .back-btn{display:block;width:100%;background:none;border:none;color:#6b8a6b;font-size:14px;font-weight:500;cursor:pointer;margin-top:12px;padding:8px;font-family:'Inter',sans-serif}
-.modal .back-btn:hover{color:#2d7a3a}
+.modal .back-btn{display:block;width:100%;background:none;border:none;font-family:'Inter',sans-serif;font-size:13px;color:#8a9f8a;cursor:pointer;margin-top:10px;padding:6px}
+.modal .back-btn:hover{color:#3a6b3a}
 </style>
 </head>
 <body>
 <div class="top-bar">AMS Landscaping &middot; <a href="https://azlawns.com" target="_blank">azlawns.com</a></div>
 <div class="hero">
-  <h1>Schedule Your Interview</h1>
-  <p>Pick any available time below. These slots are confirmed open for both interviewers.</p>
+<h1>Schedule Your Interview</h1>
+<p>Pick any available time below. These slots are confirmed open for both interviewers.</p>
 </div>
 <div class="info-bar">
-  <div class="info-item">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    30 minutes
-  </div>
-  <div class="info-item">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    Zoom link sent after booking
-  </div>
-  <div class="info-item">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-    Appointment Setter Role
-  </div>
+<div class="info-item">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+30 minutes
+</div>
+<div class="info-item">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4z"/></svg>
+Zoom link sent after booking
+</div>
+<div class="info-item">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+Appointment Setter Role
+</div>
 </div>
 <div class="container" id="slots-container"></div>
-<div class="footer-note">Times shown in Phoenix, AZ (MST) &middot; Availability as of April 02, 2026</div>
 
-<div class="modal-backdrop" id="modal-backdrop">
-  <div class="modal">
-    <svg class="check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-    <h2>Great choice!</h2>
-    <div class="selected-time" id="selected-time"></div>
-    <button class="cta-btn" id="cta-btn">Continue to Book &rarr;</button>
-    <button class="back-btn" id="back-btn">Go back</button>
-  </div>
+<div class="modal-overlay" id="modal">
+<div class="modal">
+<h2>Confirm Your Time</h2>
+<div class="selected-time" id="modal-time"></div>
+<div class="selected-date" id="modal-date"></div>
+<button class="cta-btn" id="modal-book">Continue to Book &rarr;</button>
+<button class="back-btn" onclick="closeModal()">Go back</button>
+</div>
 </div>
 
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script>
 const availableSlots = [
-  { date: '2026-04-02', times: ['4:00 PM', '4:30 PM'] },
-  { date: '2026-04-06', times: ['10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '4:00 PM'] },
-  { date: '2026-04-07', times: ['10:00 AM', '10:30 AM', '11:00 AM'] },
+  { date: '2026-04-06', times: ['10:00 AM', '10:30 AM', '12:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '4:00 PM'] },
   { date: '2026-04-09', times: ['3:30 PM', '4:00 PM', '4:30 PM'] },
   { date: '2026-04-10', times: ['4:00 PM', '4:30 PM'] },
   { date: '2026-04-13', times: ['4:00 PM'] },
   { date: '2026-04-14', times: ['10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM'] },
-  { date: '2026-04-15', times: ['9:00 AM', '9:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:30 PM'] }
+  { date: '2026-04-15', times: ['9:00 AM', '9:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:30 PM'] },
 ];
 
-const container = document.getElementById('slots-container');
-const backdrop = document.getElementById('modal-backdrop');
-const selectedTimeEl = document.getElementById('selected-time');
-const ctaBtn = document.getElementById('cta-btn');
-const backBtn = document.getElementById('back-btn');
+const WEEKDAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-const weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-function parseDate(ds) {
-  const [y,m,d] = ds.split('-').map(Number);
-  return new Date(y, m-1, d);
+function formatDateLabel(dateStr) {
+  const [y,m,d] = dateStr.split('-').map(Number);
+  const dt = new Date(y, m-1, d);
+  return { weekday: WEEKDAYS[dt.getDay()], month: MONTHS[dt.getMonth()], day: d, year: y, dt: dt };
 }
 
-const today = new Date();
-today.setHours(0,0,0,0);
+function renderSlots() {
+  const container = document.getElementById('slots-container');
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const future = availableSlots.filter(s => {
+    const [y,m,d] = s.date.split('-').map(Number);
+    return new Date(y, m-1, d) >= today;
+  });
 
-const filtered = availableSlots.filter(s => parseDate(s.date) >= today);
+  if (future.length === 0) {
+    container.innerHTML = '<div class="empty-state"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><p>No open slots right now — check back soon or reach out at <a href="https://azlawns.com" style="color:#2d7a3a;font-weight:600">azlawns.com</a></p></div>';
+    addFooter(container);
+    return;
+  }
 
-if (filtered.length === 0) {
-  container.innerHTML = '<div class="empty-state"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><h3>No open slots right now</h3><p>Check back soon or reach out at <a href="https://azlawns.com">azlawns.com</a></p></div>';
-} else {
-  filtered.forEach(day => {
-    const d = parseDate(day.date);
-    const dayNum = d.getDate();
-    const weekday = weekdays[d.getDay()];
-    const monthName = months[d.getMonth()];
-    const count = day.times.length;
+  future.forEach(day => {
+    const info = formatDateLabel(day.date);
     const card = document.createElement('div');
     card.className = 'day-card';
-    let slotsHtml = day.times.map(t =>
-      '<button class="slot-btn" data-date="' + day.date + '" data-time="' + t + '">' + t + '</button>'
+    const slotsHtml = day.times.map(t =>
+      '<button class="slot-btn" onclick="selectSlot(\'' + t + '\',\'' + day.date + '\')">' + t + '</button>'
     ).join('');
-    card.innerHTML = '<div class="day-header"><div class="date-badge">' + dayNum + '</div><div class="day-info"><h3>' + weekday + ', ' + monthName + ' ' + dayNum + '</h3><div class="meta">' + count + ' slot' + (count!==1?'s':'') + ' available</div></div></div><div class="slots">' + slotsHtml + '</div>';
+    card.innerHTML =
+      '<div class="day-header">' +
+        '<span class="date-badge">' + info.month + ' ' + info.day + '</span>' +
+        '<span class="day-name">' + info.weekday + '</span>' +
+        '<span class="slot-count">' + day.times.length + ' slot' + (day.times.length > 1 ? 's' : '') + '</span>' +
+      '</div>' +
+      '<div class="slots">' + slotsHtml + '</div>';
     container.appendChild(card);
   });
+  addFooter(container);
 }
 
-let chosenDate = '', chosenTime = '';
+function addFooter(container) {
+  const footer = document.createElement('div');
+  footer.className = 'footer-note';
+  footer.textContent = 'Times shown in Phoenix, AZ (MST) · Availability as of April 3, 2026';
+  container.appendChild(footer);
+}
 
-container.addEventListener('click', function(e) {
-  const btn = e.target.closest('.slot-btn');
-  if (!btn) return;
-  chosenDate = btn.dataset.date;
-  chosenTime = btn.dataset.time;
-  const d = parseDate(chosenDate);
-  const label = weekdays[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ' at ' + chosenTime + ' MST';
-  selectedTimeEl.textContent = label;
-  backdrop.classList.add('active');
+let selectedTime = '', selectedDate = '';
+
+function selectSlot(time, date) {
+  selectedTime = time;
+  selectedDate = date;
+  const info = formatDateLabel(date);
+  document.getElementById('modal-time').textContent = time;
+  document.getElementById('modal-date').textContent = info.weekday + ', ' + info.month + ' ' + info.day + ', ' + info.year;
+  document.getElementById('modal').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+}
+
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
 });
 
-function closeModal() { backdrop.classList.remove('active'); }
-backBtn.addEventListener('click', closeModal);
-backdrop.addEventListener('click', function(e) { if (e.target === backdrop) closeModal(); });
-
-ctaBtn.addEventListener('click', function() {
-  const d = parseDate(chosenDate);
-  const monthParam = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
-  const url = 'https://calendly.com/d/cxyz-jtx-662/setter-interview?month=' + monthParam;
+document.getElementById('modal-book').addEventListener('click', function() {
+  const [y,m] = selectedDate.split('-');
+  const url = 'https://calendly.com/d/cxyz-jtx-662/setter-interview?month=' + y + '-' + m;
+  closeModal();
   if (window.Calendly && Calendly.initPopupWidget) {
     Calendly.initPopupWidget({ url: url });
   } else {
     window.open(url, '_blank');
   }
-  closeModal();
 });
+
+renderSlots();
 </script>
 </body>
 </html>
