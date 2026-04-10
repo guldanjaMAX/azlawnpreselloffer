@@ -3,396 +3,526 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Schedule Your Interview | AMS Landscaping</title>
+<title>Schedule Your Interview · AMS Landscaping</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #2d7a3a;
+    --green-dark: #1f5a29;
+    --green-light: #e8f4eb;
+    --ink: #1a2e20;
+    --muted: #5b6d63;
+    --line: #e2ebe5;
+    --bg: #f6faf7;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #f0f5f1;
-    color: #1a2e1a;
-    min-height: 100vh;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
   }
   .header {
-    background: linear-gradient(135deg, #2d7a3a 0%, #1e5c28 100%);
-    color: white;
-    padding: 2.5rem 1.5rem 2rem;
     text-align: center;
+    margin-bottom: 40px;
   }
-  .header-label {
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    opacity: 0.85;
-    margin-bottom: 0.75rem;
+  .brand-label {
+    display: inline-block;
+    font-size: 13px;
     font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: var(--green-light);
+    padding: 8px 16px;
+    border-radius: 999px;
+    margin-bottom: 20px;
   }
-  .header h1 {
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
+  h1 {
+    font-size: 42px;
     font-weight: 800;
-    margin-bottom: 0.5rem;
     letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    color: var(--ink);
   }
-  .header p {
-    font-size: 0.95rem;
-    opacity: 0.9;
-    max-width: 480px;
+  .subtitle {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 560px;
     margin: 0 auto;
-    line-height: 1.5;
   }
   .info-bar {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 32px;
     flex-wrap: wrap;
-    padding: 1rem 1.5rem;
-    background: white;
-    border-bottom: 1px solid #e2e8e3;
+    padding: 20px 24px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    margin-bottom: 40px;
+    box-shadow: 0 1px 2px rgba(20, 40, 25, 0.04);
   }
   .info-item {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.85rem;
-    color: #3d5a3f;
+    gap: 10px;
+    font-size: 14px;
     font-weight: 500;
+    color: var(--ink);
   }
   .info-item svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
+    stroke: var(--green);
     flex-shrink: 0;
   }
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 1.5rem 1rem 3rem;
+  .days-grid {
+    display: grid;
+    gap: 18px;
   }
   .day-card {
-    background: white;
-    border-radius: 12px;
-    padding: 1.25rem 1.25rem 1rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-    border: 1px solid #e8ede9;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 1px 3px rgba(20, 40, 25, 0.05);
+    transition: box-shadow 0.2s;
+  }
+  .day-card:hover {
+    box-shadow: 0 4px 14px rgba(20, 40, 25, 0.07);
   }
   .day-header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
+    gap: 18px;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
   }
   .date-badge {
-    background: #2d7a3a;
-    color: white;
-    border-radius: 8px;
-    width: 48px;
-    height: 48px;
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    background: var(--green);
+    color: var(--white);
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    font-weight: 700;
   }
   .date-badge .month {
-    font-size: 0.6rem;
+    font-size: 10px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 600;
-    line-height: 1;
+    opacity: 0.9;
   }
   .date-badge .day {
-    font-size: 1.2rem;
-    font-weight: 800;
-    line-height: 1.15;
+    font-size: 22px;
+    line-height: 1;
+    margin-top: 2px;
   }
-  .day-info .weekday {
-    font-size: 1rem;
+  .day-info { flex: 1; }
+  .day-name {
+    font-size: 19px;
     font-weight: 700;
-    color: #1a2e1a;
+    color: var(--ink);
   }
-  .day-info .slot-count {
-    font-size: 0.8rem;
-    color: #5a7a5c;
-    font-weight: 500;
+  .slot-count {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
   }
-  .time-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+  .times-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
   }
   .time-btn {
-    background: #f0f7f1;
-    border: 1.5px solid #c8deca;
-    border-radius: 8px;
-    padding: 0.55rem 1rem;
-    font-size: 0.9rem;
+    padding: 13px 14px;
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
     font-weight: 600;
-    color: #2d7a3a;
+    color: var(--ink);
     cursor: pointer;
-    transition: all 0.15s ease;
-    font-family: 'Inter', sans-serif;
+    transition: all 0.15s;
   }
   .time-btn:hover {
-    background: #2d7a3a;
-    color: white;
-    border-color: #2d7a3a;
+    border-color: var(--green);
+    background: var(--green-light);
+    color: var(--green-dark);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(45,122,58,0.25);
   }
   .empty-state {
+    background: var(--white);
+    border: 1px dashed var(--line);
+    border-radius: 16px;
+    padding: 60px 28px;
     text-align: center;
-    padding: 3rem 1.5rem;
-    background: white;
-    border-radius: 12px;
-    border: 1px solid #e8ede9;
   }
-  .empty-state svg {
-    width: 48px;
-    height: 48px;
-    color: #a0b8a2;
-    margin-bottom: 1rem;
-  }
-  .empty-state h2 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: #3d5a3f;
+  .empty-state h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
   }
   .empty-state p {
-    font-size: 0.9rem;
-    color: #6b8a6d;
+    color: var(--muted);
+    font-size: 15px;
   }
-  .footer {
+  .footer-note {
+    margin-top: 32px;
     text-align: center;
-    padding: 0.5rem 1rem 2rem;
-    font-size: 0.78rem;
-    color: #7a9a7c;
+    font-size: 13px;
+    color: var(--muted);
   }
-
-  /* Modal */
-  .modal-overlay {
-    display: none;
+  .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.45);
-    z-index: 1000;
+    background: rgba(20, 40, 25, 0.55);
+    display: none;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    z-index: 100;
+    padding: 20px;
+    backdrop-filter: blur(3px);
   }
-  .modal-overlay.active {
-    display: flex;
-  }
+  .modal-backdrop.active { display: flex; }
   .modal {
-    background: white;
-    border-radius: 16px;
-    padding: 2rem;
-    max-width: 400px;
+    background: var(--white);
+    border-radius: 18px;
+    max-width: 440px;
     width: 100%;
+    padding: 36px 32px 30px;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    box-shadow: 0 20px 60px rgba(20, 40, 25, 0.25);
+    animation: pop 0.2s ease-out;
   }
-  .modal-icon {
+  @keyframes pop {
+    from { transform: scale(0.94); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .modal .check {
     width: 56px;
     height: 56px;
-    background: #e8f5ea;
+    background: var(--green-light);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1rem;
+    margin: 0 auto 18px;
   }
-  .modal-icon svg {
-    width: 28px;
-    height: 28px;
-    color: #2d7a3a;
-  }
+  .modal .check svg { width: 28px; height: 28px; stroke: var(--green); }
   .modal h2 {
-    font-size: 1.15rem;
+    font-size: 22px;
     font-weight: 700;
-    margin-bottom: 0.25rem;
-    color: #1a2e1a;
+    margin-bottom: 6px;
   }
-  .modal .modal-time {
-    font-size: 1rem;
-    color: #2d7a3a;
+  .modal .selected {
+    font-size: 17px;
+    color: var(--green-dark);
     font-weight: 600;
-    margin-bottom: 1.25rem;
+    margin: 12px 0 20px;
+    padding: 12px;
+    background: var(--green-light);
+    border-radius: 10px;
   }
-  .modal .btn-book {
+  .modal p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 22px;
+  }
+  .btn-primary {
     display: block;
     width: 100%;
-    padding: 0.8rem;
-    background: #2d7a3a;
-    color: white;
+    padding: 14px 20px;
+    background: var(--green);
+    color: var(--white);
     border: none;
     border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 700;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    transition: background 0.15s ease;
-    margin-bottom: 0.6rem;
+    transition: background 0.15s;
+    margin-bottom: 10px;
   }
-  .modal .btn-book:hover {
-    background: #236b2f;
-  }
-  .modal .btn-back {
+  .btn-primary:hover { background: var(--green-dark); }
+  .btn-link {
     background: none;
     border: none;
-    color: #6b8a6d;
-    font-size: 0.9rem;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 14px;
     font-weight: 500;
-    padding: 0.4rem;
+    cursor: pointer;
+    padding: 8px;
   }
-  .modal .btn-back:hover {
-    color: #3d5a3f;
+  .btn-link:hover { color: var(--ink); }
+  @media (max-width: 600px) {
+    h1 { font-size: 32px; }
+    .subtitle { font-size: 16px; }
+    .info-bar { gap: 18px; padding: 16px; }
+    .day-card { padding: 20px; }
+    .container { padding: 32px 16px 60px; }
   }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-label">AMS Landscaping &middot; azlawns.com</div>
-  <h1>Schedule Your Interview</h1>
-  <p>Pick any available time below. These slots are confirmed open for both interviewers.</p>
-</div>
-
-<div class="info-bar">
-  <div class="info-item">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    30 minutes
+<div class="container">
+  <div class="header">
+    <div class="brand-label">AMS Landscaping · azlawns.com</div>
+    <h1>Schedule Your Interview</h1>
+    <p class="subtitle">Pick any available time below. These slots are confirmed open for both interviewers.</p>
   </div>
-  <div class="info-item">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    Zoom link sent after booking
-  </div>
-  <div class="info-item">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-    Appointment Setter Role
-  </div>
-</div>
 
-<div class="container" id="slots-container"></div>
-
-<div class="footer">
-  Times shown in Phoenix, AZ (MST) &middot; Availability as of April 09, 2026
-</div>
-
-<div class="modal-overlay" id="modal-overlay">
-  <div class="modal">
-    <div class="modal-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+  <div class="info-bar">
+    <div class="info-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      30 minutes
     </div>
-    <h2>Confirm Your Time</h2>
-    <div class="modal-time" id="modal-time"></div>
-    <button class="btn-book" id="btn-book">Continue to Book &rarr;</button>
-    <button class="btn-back" id="btn-back">Go back</button>
+    <div class="info-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      Zoom link sent after booking
+    </div>
+    <div class="info-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Appointment Setter Role
+    </div>
+  </div>
+
+  <div id="days-container" class="days-grid"></div>
+
+  <p class="footer-note">
+    Times shown in Phoenix, AZ (MST) · Availability as of April 10, 2026
+  </p>
+</div>
+
+<div class="modal-backdrop" id="modal">
+  <div class="modal">
+    <div class="check">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2>Confirm your slot</h2>
+    <div class="selected" id="selected-display"></div>
+    <p>You will be taken to a short booking form to lock in this time.</p>
+    <button class="btn-primary" id="continue-btn">Continue to Book &rarr;</button>
+    <button class="btn-link" id="back-btn">Go back</button>
   </div>
 </div>
 
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script>
 const availableSlots = [
-  { date: '2026-04-13', times: ['4:00 PM'] },
-  { date: '2026-04-14', times: ['10:00 AM', '1:30 PM', '4:00 PM'] },
-  { date: '2026-04-15', times: ['9:00 AM', '9:30 AM', '11:00 AM', '12:30 PM', '3:00 PM', '3:30 PM'] },
-  { date: '2026-04-20', times: ['10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM'] },
-  { date: '2026-04-21', times: ['10:30 AM', '12:00 PM', '1:30 PM', '2:00 PM', '2:30 PM'] },
-  { date: '2026-04-22', times: ['9:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '3:30 PM', '4:00 PM'] },
-  { date: '2026-04-23', times: ['9:30 AM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM'] }
+  {
+    "date": "2026-04-13",
+    "times": [
+      "3:00 PM",
+      "4:00 PM"
+    ]
+  },
+  {
+    "date": "2026-04-14",
+    "times": [
+      "10:00 AM",
+      "1:30 PM",
+      "4:00 PM"
+    ]
+  },
+  {
+    "date": "2026-04-15",
+    "times": [
+      "9:00 AM",
+      "9:30 AM",
+      "11:00 AM",
+      "12:30 PM",
+      "3:00 PM",
+      "3:30 PM"
+    ]
+  },
+  {
+    "date": "2026-04-20",
+    "times": [
+      "10:00 AM",
+      "10:30 AM",
+      "11:00 AM",
+      "11:30 AM",
+      "12:00 PM",
+      "12:30 PM",
+      "1:00 PM",
+      "1:30 PM",
+      "2:00 PM",
+      "2:30 PM"
+    ]
+  },
+  {
+    "date": "2026-04-21",
+    "times": [
+      "10:30 AM",
+      "12:00 PM",
+      "1:30 PM",
+      "2:00 PM",
+      "2:30 PM"
+    ]
+  },
+  {
+    "date": "2026-04-22",
+    "times": [
+      "9:30 AM",
+      "11:00 AM",
+      "11:30 AM",
+      "12:00 PM",
+      "12:30 PM",
+      "1:00 PM",
+      "1:30 PM",
+      "3:30 PM",
+      "4:00 PM"
+    ]
+  },
+  {
+    "date": "2026-04-23",
+    "times": [
+      "9:30 AM",
+      "1:30 PM",
+      "2:00 PM",
+      "2:30 PM",
+      "3:00 PM",
+      "3:30 PM",
+      "4:00 PM"
+    ]
+  },
+  {
+    "date": "2026-04-24",
+    "times": [
+      "9:00 AM",
+      "9:30 AM",
+      "10:00 AM",
+      "10:30 AM",
+      "11:00 AM",
+      "11:30 AM",
+      "12:00 PM",
+      "12:30 PM",
+      "2:00 PM",
+      "2:30 PM",
+      "3:00 PM",
+      "3:30 PM",
+      "4:00 PM",
+      "4:30 PM"
+    ]
+  }
 ];
 
-const WEEKDAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const CALENDLY_BASE = "https://calendly.com/d/cxyz-jtx-662/setter-interview";
+const WEEKDAY_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const MONTH_SHORT = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-function renderSlots() {
-  const container = document.getElementById('slots-container');
-  const today = new Date();
-  today.setHours(0,0,0,0);
+function parseLocalDate(ymd) {
+  const [y, m, d] = ymd.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
 
-  const future = availableSlots.filter(s => {
-    const d = new Date(s.date + 'T00:00:00');
-    return d >= today;
-  });
+function todayLocalYMD() {
+  const n = new Date();
+  const y = n.getFullYear();
+  const m = String(n.getMonth() + 1).padStart(2, "0");
+  const d = String(n.getDate()).padStart(2, "0");
+  return y + "-" + m + "-" + d;
+}
 
-  if (future.length === 0) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <h2>No open slots right now</h2>
-        <p>Check back soon or reach out at azlawns.com</p>
-      </div>`;
+function render() {
+  const container = document.getElementById("days-container");
+  const today = todayLocalYMD();
+  const upcoming = availableSlots.filter(s => s.date >= today && s.times.length > 0);
+
+  if (upcoming.length === 0) {
+    container.innerHTML = '<div class="empty-state"><h3>No open slots right now</h3><p>Check back soon or reach out at azlawns.com</p></div>';
     return;
   }
 
-  future.forEach(slot => {
-    const d = new Date(slot.date + 'T00:00:00');
-    const weekday = WEEKDAYS[d.getDay()];
-    const month = MONTHS[d.getMonth()];
-    const dayNum = d.getDate();
-    const count = slot.times.length;
+  container.innerHTML = upcoming.map(day => {
+    const dt = parseLocalDate(day.date);
+    const weekday = WEEKDAY_NAMES[dt.getDay()];
+    const month = MONTH_SHORT[dt.getMonth()];
+    const dayNum = dt.getDate();
+    const count = day.times.length;
+    const btns = day.times.map(t =>
+      '<button class="time-btn" data-date="' + day.date + '" data-time="' + t + '">' + t + '</button>'
+    ).join("");
+    return (
+      '<div class="day-card">' +
+        '<div class="day-header">' +
+          '<div class="date-badge"><div class="month">' + month + '</div><div class="day">' + dayNum + '</div></div>' +
+          '<div class="day-info">' +
+            '<div class="day-name">' + weekday + '</div>' +
+            '<div class="slot-count">' + count + ' open slot' + (count === 1 ? '' : 's') + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="times-grid">' + btns + '</div>' +
+      '</div>'
+    );
+  }).join("");
 
-    const card = document.createElement('div');
-    card.className = 'day-card';
-    card.innerHTML = `
-      <div class="day-header">
-        <div class="date-badge">
-          <span class="month">${month}</span>
-          <span class="day">${dayNum}</span>
-        </div>
-        <div class="day-info">
-          <div class="weekday">${weekday}</div>
-          <div class="slot-count">${count} slot${count !== 1 ? 's' : ''} available</div>
-        </div>
-      </div>
-      <div class="time-grid">
-        ${slot.times.map(t => `<button class="time-btn" data-date="${slot.date}" data-time="${t}">${t}</button>`).join('')}
-      </div>`;
-    container.appendChild(card);
+  document.querySelectorAll(".time-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const d = btn.getAttribute("data-date");
+      const t = btn.getAttribute("data-time");
+      openModal(d, t);
+    });
   });
 }
 
-let selectedDate = '';
-let selectedTime = '';
+let pendingDate = null;
 
-document.addEventListener('click', function(e) {
-  if (e.target.classList.contains('time-btn')) {
-    selectedDate = e.target.dataset.date;
-    selectedTime = e.target.dataset.time;
-    const d = new Date(selectedDate + 'T00:00:00');
-    const weekday = WEEKDAYS[d.getDay()];
-    const month = MONTHS[d.getMonth()];
-    const dayNum = d.getDate();
-    document.getElementById('modal-time').textContent = weekday + ', ' + month + ' ' + dayNum + ' at ' + selectedTime + ' MST';
-    document.getElementById('modal-overlay').classList.add('active');
-  }
-});
+function openModal(dateStr, timeStr) {
+  const dt = parseLocalDate(dateStr);
+  const weekday = WEEKDAY_NAMES[dt.getDay()];
+  const month = MONTH_SHORT[dt.getMonth()];
+  const dayNum = dt.getDate();
+  document.getElementById("selected-display").textContent = weekday + ", " + month + " " + dayNum + " at " + timeStr;
+  pendingDate = dateStr;
+  document.getElementById("modal").classList.add("active");
+}
 
-document.getElementById('btn-back').addEventListener('click', function() {
-  document.getElementById('modal-overlay').classList.remove('active');
-});
+function closeModal() {
+  document.getElementById("modal").classList.remove("active");
+  pendingDate = null;
+}
 
-document.getElementById('modal-overlay').addEventListener('click', function(e) {
-  if (e.target === this) this.classList.remove('active');
-});
-
-document.getElementById('btn-book').addEventListener('click', function() {
-  const monthStr = selectedDate.substring(0, 7);
-  const url = 'https://calendly.com/d/cxyz-jtx-662/setter-interview?month=' + monthStr;
-  if (window.Calendly && window.Calendly.initPopupWidget) {
+function launchCalendly() {
+  if (!pendingDate) return;
+  const ym = pendingDate.slice(0, 7);
+  const url = CALENDLY_BASE + "?month=" + ym;
+  closeModal();
+  if (window.Calendly && typeof window.Calendly.initPopupWidget === "function") {
     window.Calendly.initPopupWidget({ url: url });
   } else {
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   }
-  document.getElementById('modal-overlay').classList.remove('active');
-});
+}
 
-renderSlots();
+document.getElementById("modal").addEventListener("click", (e) => {
+  if (e.target.id === "modal") closeModal();
+});
+document.getElementById("back-btn").addEventListener("click", closeModal);
+document.getElementById("continue-btn").addEventListener("click", launchCalendly);
+
+render();
 </script>
 </body>
 </html>
