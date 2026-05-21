@@ -1,0 +1,8 @@
+# robots.txt for gotlandscapers.com
+# Cloudflare's Managed Bots policy adds its own AI-bot directives at the edge.
+# This file declares the sitemap so Google + Bing find it explicitly.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://gotlandscapers.com/sitemap.xml
